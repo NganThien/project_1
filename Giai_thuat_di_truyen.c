@@ -20,7 +20,7 @@ void Taoquanthe(int n){
 void Giatrithichnghi(int n){
     int gttn;
     for(int i = 0; i<n; i++){
-        gttn = 1000 - (CT[i]*CT[i]-64);
+        gttn = (1000 - (CT[i]*CT[i]-64));
         GTTN[i] = gttn;
     }
 }
@@ -52,6 +52,47 @@ void Laicathe(){
         B[i] = 0;
     }
     while(max1!=0){
-        
+        for(int j=0; j<5; j++){
+            A[j]=max1%2;
+            max1=max1/2;
+        }
     }
+    while(max2!=0){
+        for(int k=0; k<5; k++){
+            B[k]=max2%2;
+            max2=max2/2;
+        }
+    }
+    for(int l=4; l>1;l--){
+        int tmp = A[l];
+        A[l] = B[l];
+        B[l] = tmp;
+    }
+    for(int m = 4; m>0; m--){
+        maxmoi1 = maxmoi1 + A[m]*pow(2,m);
+        maxmoi2 = maxmoi2 + B[m]*pow(2,m);
+    }
+}
+//tạo quần thể mới
+void Taoquanthemoi(){
+    CT[0] = max1;
+    CT[1] = max2;
+    CT[2] = maxmoi1;
+    CT[3] = maxmoi2; 
+}
+int main(){
+    printf("Giai phuong trinh: x^2 = 64 bang thuat toan di truyen.\n");
+    printf("Tao quan the co 4 ca the.\n");
+    Taoquanthe(n);
+    Giatrithichnghi(n);
+    kq = Kiemtra(n);
+    while(kq == 0){
+        Timcathelai();
+        Laicathe();
+        Taoquanthemoi();
+        Giatrithichnghi(n);
+        kq = Kiemtra(n);
+    }
+    printf("Ket qua phuong trinh la: %d", kq);
+    return 0;
 }
